@@ -14,18 +14,18 @@ public class LoginController {
     }
     
     @GetMapping("/customer")
-    @PreAuthorize("hasRole('CUSTOMER')")
+    @PreAuthorize("hasRole('ROLE_CUSTOMER')")
     public String customerPage() {
     	return "Customer Page";
     }
     
     @GetMapping("/admin")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String adminPage() {
     	return "Admin Page";
     }
     
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
     @GetMapping("/manager")
     public String managerPage() {
     	return "Manager Page";
