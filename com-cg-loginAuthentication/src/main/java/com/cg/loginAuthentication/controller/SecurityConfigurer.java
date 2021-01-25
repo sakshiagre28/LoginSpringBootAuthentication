@@ -19,35 +19,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.cg.loginAuthentication.jwt.AuthEntryPointJwt;
 import com.cg.loginAuthentication.jwt.AuthTokenFilter;
 import com.cg.loginAuthentication.services.UserDetailsServiceImpl;
-/*
-@EnableWebSecurity
-public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
-	
-	@Autowired
-	UserDetailsService userDetailsService;
-	
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception{
-		
-		auth.userDetailsService(userDetailsService);
-		
-	
-	}
-	
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-				.antMatchers("/admin").hasRole("ADMIN")
-				.antMatchers("/customer").hasAnyRole("ADMIN","CUSTOMER")
-				.antMatchers("/manager").hasRole("MANAGER")
-				.antMatchers("/").permitAll()
-				.and().formLogin();
-	}
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return NoOpPasswordEncoder.getInstance();
-	}
-	*/
+
 	@Configuration
 	@EnableWebSecurity
 	@EnableGlobalMethodSecurity(
@@ -89,6 +61,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter{
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				.authorizeRequests().antMatchers("/auth/**").permitAll()
 				.antMatchers("/api/test/**").permitAll()
+				.antMatchers("/").permitAll()
 				.anyRequest().authenticated();
 			http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 			//http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
